@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
+import Viewproduct from "./components/Viewproduct";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/products/:id" element={<Viewproduct/>} />
       </Routes>
     </BrowserRouter>
   );

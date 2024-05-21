@@ -1,10 +1,14 @@
 import React, { createContext, useState, useEffect } from "react";
 
-const ProductContext = createContext();
+ export  const ProductContext = createContext();
 
-const ProductContextProvider = ({ children }) => {
+  export  function  ProductContextProvider({ children }){
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState(0); 
+  const [cart, setCart] = useState(() => {
+    // Initialize cart from localStorage
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   // Get products from API
   const fetchProducts = async () => {
@@ -20,15 +24,15 @@ const ProductContextProvider = ({ children }) => {
 
 
 
-
+  const value = { setCart, cart , products, setProducts};
 
 
 
   return (
-    <ProductContext.Provider value={{ products, setProducts, cart, setCart }}>
+    <ProductContext.Provider value={value}>
       {children}
     </ProductContext.Provider>
   );
 };
 
-export { ProductContext, ProductContextProvider };
+
